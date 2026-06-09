@@ -1,0 +1,24 @@
+@if(open()) {
+<div class="fixed inset-0 bg-black/50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
+        <h2 class="text-xl font-semibold mb-4">
+            Crear nueva tarea
+        </h2>
+        <input type="text" placeholder="Título" [formField]="createTaskForm.title"
+            class="w-full mb-4 px-3 py-2 border rounded" />
+
+        <input type="text" placeholder="Descripción(Opcional)" [formField]="createTaskForm.description"
+            class="w-full mb-4 px-3 py-2 border rounded">
+
+        <div class="flex justify-end gap-2">
+            <button (click)="submit()" class="px-4 py-2 bg-cyan-600 hover:bg-cyan-800 text-white">
+                Crear
+            </button>
+            <button (click)="close()" class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300">
+                Cerrar
+            </button>
+        </div>
+    </div>
+
+</div>
+}
