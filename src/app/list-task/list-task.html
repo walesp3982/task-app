@@ -1,4 +1,4 @@
-<table class="table-auto w-full border-collapse">
+<table class="table-auto w-full border-collapse cursor-default">
     <thead class="text-left bg-purple-500">
         <tr>
             <!-- <th class="px-4 py-3 text-left font-semibold">Id</th> -->
@@ -8,8 +8,13 @@
         </tr>
     </thead>
     <tbody>
+        @if (tasks.length === 0) {
+            <tr class="border-b border-purple-200 bg-purple-300 hover:bg-purple-400 cursor-pointer">
+                <td class="px-4 py-10 text-center" colspan="4">No hay tareas disponibles</td>
+            </tr>
+        }
         @for(task of tasks; track task.id) {
-            <tr class="border-b border-purple-200 bg-purple-300 hover:bg-purple-400">
+            <tr class="border-b border-purple-200 bg-purple-300 hover:bg-purple-400 cursor-pointer">
                 <!-- <td class="px-4 py-3">{{ task.id }}</td> -->
                 <td class="px-4 py-3">{{ task.title }}</td>
                 <td class="px-4 py-3">{{ task.description ?? "(Sin descripción)" }}</td>
