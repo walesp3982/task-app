@@ -1,5 +1,5 @@
 import { Observable, from } from 'rxjs';
-import { CreateTaskDto, TaskRepositoryInterface } from './interface';
+import { CreateTaskDTO, TaskRepositoryInterface } from './interface';
 import { Task } from './interface';
 import { Service } from '@angular/core';
 
@@ -9,11 +9,11 @@ export class TaskRepositoryMemory implements TaskRepositoryInterface {
 
     constructor() {
         // Create data of example
-        this.createTask(new CreateTaskDto('Task 1', 'Description for Task 1'));
-        this.createTask(new CreateTaskDto('Task 2', 'Description for Task 2'));
-        this.createTask(new CreateTaskDto('Task 3'));
+        this.createTask(new CreateTaskDTO('Task 1', 'Description for Task 1'));
+        this.createTask(new CreateTaskDTO('Task 2', 'Description for Task 2'));
+        this.createTask(new CreateTaskDTO('Task 3'));
     }
-    createTask(task: CreateTaskDto): Observable<Task> {
+    createTask(task: CreateTaskDTO): Observable<Task> {
         const newTask = new Task(this.tasks.length + 1, task.title, false, task.description);
         this.tasks.push(newTask);
         return new Observable(subscriber => {

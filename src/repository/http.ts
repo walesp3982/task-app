@@ -1,5 +1,5 @@
 import { inject, Service } from "@angular/core";
-import { CreateTaskDto, Task, TaskRepositoryInterface } from "./interface";
+import { CreateTaskDTO, Task, TaskRepositoryInterface } from "./interface";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { environment } from "../environments/environment";
@@ -11,7 +11,7 @@ export class TaskRepositoryHttp implements TaskRepositoryInterface{
 
     private http = inject(HttpClient);
 
-    public createTask(dto: CreateTaskDto): Observable<Task> {
+    public createTask(dto: CreateTaskDTO): Observable<Task> {
         return this.http.post<Task>(this.apiUrl, dto);
     }
 

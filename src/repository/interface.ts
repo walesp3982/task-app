@@ -14,7 +14,7 @@ export class Task {
     }
 }
 
-export class CreateTaskDto {
+export class CreateTaskDTO {
     title: string
     description?: string
 
@@ -24,7 +24,7 @@ export class CreateTaskDto {
     }
 }
 export interface TaskRepositoryInterface {
-    createTask(dto: CreateTaskDto): Observable<Task>;
+    createTask(dto: CreateTaskDTO): Observable<Task>;
     getTaskById(id: number): Observable<Task | null>;
     getAllTasks(): Observable<Task[]>;
     updateTask(id: number, task: Task): Observable<Task>;
