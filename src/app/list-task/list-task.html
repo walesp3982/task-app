@@ -1,0 +1,20 @@
+<table class="table-auto w-full border-collapse">
+    <thead class="text-left bg-purple-500">
+        <tr>
+            <!-- <th class="px-4 py-3 text-left font-semibold">Id</th> -->
+            <th class="px-4 py-3 text-left font-semibold">Titulo</th>
+            <th class="px-4 py-3 text-left font-semibold">Descripción</th>
+            <th class="px-4 py-3 text-left font-semibold">Completed</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(task of tasks; track task.id) {
+            <tr class="border-b border-purple-200 bg-purple-300 hover:bg-purple-400">
+                <!-- <td class="px-4 py-3">{{ task.id }}</td> -->
+                <td class="px-4 py-3">{{ task.title }}</td>
+                <td class="px-4 py-3">{{ task.description ?? "(Sin descripción)" }}</td>
+                <td class="px-4 py-3">{{ task.completed }}</td>
+            </tr>
+        }
+    </tbody> 
+</table>
