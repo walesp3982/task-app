@@ -1,10 +1,10 @@
-<table class="table-auto w-full border-collapse cursor-default">
+<table class="table-fixed w-full border-collapse cursor-default">
     <thead class="text-left bg-purple-500">
         <tr>
             <!-- <th class="px-4 py-3 text-left font-semibold">Id</th> -->
             <th class="px-4 py-3 text-left font-semibold">Titulo</th>
             <th class="px-4 py-3 text-left font-semibold">Descripción</th>
-            <th class="px-4 py-3 text-left font-semibold">Completed</th>
+            <th class="px-4 py-3 text-left font-semibold">Estado</th>
         </tr>
     </thead>
     <tbody>
@@ -18,7 +18,16 @@
                 <!-- <td class="px-4 py-3">{{ task.id }}</td> -->
                 <td class="px-4 py-3">{{ task.title }}</td>
                 <td class="px-4 py-3">{{ task.description ?? "(Sin descripción)" }}</td>
-                <td class="px-4 py-3">{{ task.completed }}</td>
+                <td class="px-4 py-3 flex items-center gap-4"> 
+                    @if (task.completed) {
+                        <span class="rounded-xl bg-green-500 p-2 font-semibold text-white" (click)="toggleCompleted(task)">Completada</span>   
+                    } @else {
+                        <span class="rounded-xl bg-red-500 p-2 font-semibold text-white" (click)="toggleCompleted(task)">Pendiente</span>
+                    }
+                    <button class="rounded-xl bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4" (click)="updateActualTask(task.id)">
+                        Editar
+                    </button>
+                </td>
             </tr>
         }
     </tbody> 
