@@ -1,0 +1,63 @@
+<!-- <button
+  (click)="close()"
+  class="px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700"
+>
+  Abrir
+</button> -->
+
+@if (taskId !== null) {
+  <div
+    class="fixed inset-0 bg-black/50 flex items-center justify-center"
+  >
+    <div
+      class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md"
+    >
+      <h2 class="text-xl font-semibold mb-4">
+        Actualizar Tarea
+      </h2>
+
+      <input
+        type="text"
+        placeholder="Título"
+        [formField]="updateForm.title"        
+        class="w-full mb-4 px-3 py-2 border rounded">
+
+      <input
+        type="text"
+        placeholder="Descripción"
+        [formField]="updateForm.description"
+        class="w-full mb-4 px-3 py-2 border rounded">
+
+
+       <label class="flex items-center mb-4">
+        <input
+          type="checkbox"
+          [formField]="updateForm.completed"
+          class="mr-2"
+        >
+        Completada
+      </label>
+
+      <div class="flex justify-end gap-2">
+        <button
+          (click)="deleteTask()"
+          class="px-4 py-2 rounded bg-orange-700 hover:bg-orange-800 text-white"
+        >
+          Eliminar
+        </button>
+        <button
+          (click)="updateTask()"
+          class="px-4 py-2 rounded bg-cyan-700 hover:bg-cyan-800 text-white"
+        >
+          Guardar
+        </button>
+        <button
+          (click)="close()"
+          class="px-4 py-2 rounded bg-gray-200 hover:bg-gray-300"
+        >
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+}
