@@ -12,7 +12,7 @@ import { TaskRepositoryHttp } from '../../repository/http';
 
 export class ListTask {
   taskService: TaskRepositoryInterface = inject(TaskRepositoryHttp);
-  tasks = input<Task[]>([]);
+  tasks = input.required<Task[]>();
   changeUpdateTask = output<number>();
 
   updateActualTask(id: number) {
