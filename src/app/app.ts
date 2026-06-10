@@ -21,9 +21,7 @@ export class App {
   protected tasks = signal<Task[]>([])
   protected openCreateTaskDialog = signal(false)
 
-  protected updatedTaskId: number | null = null;
-
-
+  protected updatedTaskId = signal<number | null>(null);
 
   ngOnInit() {
     this.refresh()
@@ -35,5 +33,11 @@ export class App {
       this.tasks.set(tasks)
       console.log("Fetching tasks completed")
     })
+  }
+
+  onDialogClosed() {
+    this.openCreateTaskDialog.set(false);
+    this.updatedTaskId.set(null);
+    this.refresh();
   }
 }
