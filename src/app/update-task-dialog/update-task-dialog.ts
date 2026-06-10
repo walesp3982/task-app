@@ -1,6 +1,5 @@
 import { Component, inject, input, output, signal } from '@angular/core';
 import { Task, TaskRepositoryInterface } from '../../repository/interface';
-import { TaskRepositoryMemory } from '../../repository/memory';
 import { form, FormField } from '@angular/forms/signals';
 import { TaskRepositoryHttp } from '../../repository/http';
 
@@ -29,18 +28,19 @@ export class UpdateTaskDialog {
   protected task: Task | null = null;
 
   taskId = input.required<number>();
-  open = output<boolean>();
+  close = output<void>();
 
   updateForm = form(updateModel);
 
-  close() {
-    this.open.emit(false);
+  closeDialog() {
+    console.log("Closing UpdateTaskDialog")
+    this.close.emit();
   }
 
   ngOnInit() {
     this.repository.getTaskById(this.taskId()).subscribe(task => {
       if (task === null) {
-        this.close();
+        this.closeDialog();
         console.error('Task not found with id:', this.taskId());
         return;
       }
@@ -70,13 +70,13 @@ export class UpdateTaskDialog {
     this.repository.updateTask(this.taskId(), this.task!).subscribe(updatedTask => {
       console.log('Task updated:', updatedTask);
     });
-    this.close();
+    this.closeDialog();
   }
 
   deleteTask() {
     this.repository.deleteTask(this.taskId()).subscribe(() => {
       console.log('Task deleted');
-      this.close();
+      this.closeDialog();
     });
   }
 
