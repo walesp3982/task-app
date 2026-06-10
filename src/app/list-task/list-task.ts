@@ -1,6 +1,7 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject, output, signal } from '@angular/core';
 import { Task, TaskRepositoryInterface } from '../../repository/interface';
 import { TaskRepositoryMemory } from '../../repository/memory';
+import { TaskRepositoryHttp } from '../../repository/http';
 
 @Component({ 
   selector: 'app-list-task',
@@ -10,8 +11,8 @@ import { TaskRepositoryMemory } from '../../repository/memory';
 })
 
 export class ListTask {
-  taskService: TaskRepositoryInterface = inject(TaskRepositoryMemory);
-  tasks: Task[] = [];
+  taskService: TaskRepositoryInterface = inject(TaskRepositoryHttp);
+  tasks = signal<Task[]>([]);
   changeUpdateTask = output<number>();
 
   updateActualTask(id: number) {
@@ -20,10 +21,7 @@ export class ListTask {
   }
 
   ngOnInit() {
-    this.taskService.getAllTasks().subscribe((tasks) => {
-      this.tasks = tasks;
-      console.log(tasks)
-    });
+    this.refresh()
   }
 
   // Mark as completed 
@@ -32,15 +30,13 @@ export class ListTask {
     this.taskService.updateTask(task.id, task).subscribe(() => {
       console.log(`Task ${task.id} updated successfully`);
     });
-    this.taskService.getAllTasks().subscribe((tasks) => {
-      this.tasks = tasks;
-    });
+    this.refresh()
   }
 
   refresh() {
     console.log('Refreshing task list');
     this.taskService.getAllTasks().subscribe((tasks) => {
-      this.tasks = tasks;
+      this.tasks.set(tasks);
     });
   }
 }

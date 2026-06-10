@@ -2,6 +2,7 @@ import { Component, inject, input, output, signal } from '@angular/core';
 import { Task, TaskRepositoryInterface } from '../../repository/interface';
 import { TaskRepositoryMemory } from '../../repository/memory';
 import { form, FormField } from '@angular/forms/signals';
+import { TaskRepositoryHttp } from '../../repository/http';
 
 
 interface UpdateTaskData {
@@ -24,7 +25,7 @@ const updateModel = signal<UpdateTaskData>({
   styleUrl: './update-task-dialog.css',
 })
 export class UpdateTaskDialog {
-  protected repository: TaskRepositoryInterface = inject(TaskRepositoryMemory);
+  protected repository: TaskRepositoryInterface = inject(TaskRepositoryHttp);
   protected task: Task | null = null;
 
   taskId = input.required<number>();

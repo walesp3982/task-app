@@ -2,6 +2,7 @@ import { Component, inject, input, model, signal } from '@angular/core';
 import { form, minLength, required, FormField } from '@angular/forms/signals';
 import { CreateTaskDTO, TaskRepositoryInterface } from '../../repository/interface';
 import { TaskRepositoryMemory } from '../../repository/memory';
+import { TaskRepositoryHttp } from '../../repository/http';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class CreateTaskDialog {
     minLength(schemaPath.title, 1)
   })
 
-  repository: TaskRepositoryInterface = inject(TaskRepositoryMemory)
+  repository: TaskRepositoryInterface = inject(TaskRepositoryHttp)
 
   submit() {
     let model = this.createTaskModel()
@@ -33,7 +34,17 @@ export class CreateTaskDialog {
     )
 
     let task = this.repository.createTask(dto)
-    console.log("Task created: ", task)
+    task.subscribe({
+      next(x) {
+        console.log('Create task ', x);
+      },
+      error(err) {
+        console.error('something wrong occurred: ' + err);
+      },
+      complete() {
+        console.log('Task created correctly');
+      },
+    })
   }
 
   close() {
