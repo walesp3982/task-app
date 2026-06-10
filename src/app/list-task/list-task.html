@@ -1,6 +1,4 @@
-<button class="mb-4 rounded-xl bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4" (click)="refresh()">
-    Refrescar
-</button>
+
 <table class="table-fixed w-full border-collapse cursor-default">
     <thead class="text-left bg-purple-500">
         <tr>
@@ -20,7 +18,7 @@
                 <!-- <td class="px-4 py-3">{{ task.id }}</td> -->
                 <td class="px-4 py-3">{{ task.title }}</td>
                 <td class="px-4 py-3">{{ task.description ?? "(Sin descripción)" }}</td>
-                <td class="px-4 py-3 flex items-center gap-4"> 
+                <td class="px-4 py-3 flex items-center gap-4 justify-between"> 
                     @if (task.completed) {
                         <span class="rounded-xl bg-green-500 p-2 font-semibold text-white" (click)="toggleCompleted(task)">Completada</span>   
                     } @else {
